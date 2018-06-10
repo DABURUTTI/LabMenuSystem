@@ -1,0 +1,302 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- やあ！わざわざここを覗きに来たのかい？　はじめまして、DABUです！
+	ラボのでっかい画面のあれと、APIとこのサイトは実は学園生の俺が作ったんだ！
+	俺は来年卒業してしまうから、後任を探しているよ、もしよかったらH3Eのダブルッチを訪ねてみてくれ！
+	ファイルを丸ごとあげるし、可能であるならばサーバーも引き継いでもらいたい
+	気軽に質問しに来てね！もしくは、daburutti@gmail.comまで! -->
+  <title>ラボメニューWEB　Admin</title>
+  <link rel="shortcut icon" href="./favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="icon" href="./favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <style type="text/css">
+    body {
+      padding-top: 80px;
+    }
+
+    @media ( min-width: 768px) {
+      #banner {
+        min-height: 300px;
+        border-bottom: none;
+      }
+      .bs-docs-section {
+        margin-top: 8em;
+      }
+      .bs-component {
+        position: relative;
+      }
+      .bs-component .modal {
+        position: relative;
+        top: auto;
+        right: auto;
+        left: auto;
+        bottom: auto;
+        z-index: 1;
+        display: block;
+      }
+      .bs-component .modal-dialog {
+        width: 90%;
+      }
+      .bs-component .popover {
+        position: relative;
+        display: inline-block;
+        width: 220px;
+        margin: 20px;
+      }
+      .nav-tabs {
+        margin-bottom: 15px;
+      }
+      .progress {
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+
+  <!--[if lt IE 9]>
+      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <!-- APIからJsonを取得して画面に反映させる一連の処理 -->
+  <script type="text/javascript" src="js/jquery-1.3.2.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="./index.html" class="navbar-brand">ラボメニューWEB　Admin</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+        </div>
+        <div class="col-lg-9">
+          <h1>湘南学園カフェテリア</h1>
+          <p class="lead">メニュー編集ページ </p>
+          <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 id="dialoghead" class="modal-title">アップロード中</h4>
+                    <hr>
+                  </div>
+                  <div class="modal-body" align="center">
+                    <h5 id="dialogtext"></h5>
+                    <div id="progress" class="progress progress-striped active">
+                      <div class="progress-bar" style="width: 100%"></div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="col-lg-3">
+          <br>
+          <div class="alert alert-dismissible alert-info">
+            <div align="center">
+              <strong>画像は自動でサイズが調整されます。</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">メニュー A</h3>
+            </div>
+            <div class="panel-body">
+              <div align="center">
+                <img id="image1" src="http://122.210.136.164:443/api/img/menuimage1-sm.png" class="img-responsive img-rounded" id="menu1"
+                  style="text-align:center;">
+              </div>
+              <form id="form1">
+                <br>
+                <p>商品名</p>
+                <input type="text" class="form-control" id="inputname1">
+                <br>
+                <p>値段</p>
+                <input type="text" class="form-control" id="price1" placeholder="値段">
+                <br>
+                <p>コメント</p>
+                <textarea class="form-control" rows="3" id="textArea1" style="height: 100px; resize: vertical; overflow: auto;"></textarea>
+                <hr>
+                <p>画像アップロード</p>
+                <div>
+                  <input type="file" name="menuimage1" />
+                </div>
+                <br>
+                <a href="javascript:void(0);" onclick="ExecUpload_1();" class="btn btn-primary">アップロード</a>
+                <br>
+                <p id="test1"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">メニュー B</h3>
+            </div>
+            <div class="panel-body">
+              <div align="center">
+                <img id="image2" src="http://122.210.136.164:443/api/img/menuimage2-sm.png" class="img-responsive img-rounded" style="text-align:center;">
+              </div>
+              <form id="form2">
+                <br>
+                <p>商品名</p>
+                <input type="text" class="form-control" id="inputname2">
+                <br>
+                <p>値段</p>
+                <input type="text" class="form-control" id="price2" 　placeholder="値段">
+                <br>
+                <p>コメント</p>
+                <textarea class="form-control" rows="3" id="textArea2" style="height: 100px; resize: vertical; overflow: auto;"></textarea>
+
+                <hr>
+                <p>画像アップロード</p>
+                <div>
+                  <input type="file" name="menuimage2" />
+                </div>
+                <br>
+                <a href="javascript:void(0);" onclick="ExecUpload_2();" class="btn btn-primary">アップロード</a>
+                <br>
+                <p id="test2"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">メニュー C</h3>
+            </div>
+            <div class="panel-body">
+              <div align="center">
+                <img id="image3" src="http://122.210.136.164:443/api/img/menuimage3-sm.png" class="img-responsive img-rounded" style="text-align:center;">
+              </div>
+              <div align="center">
+                <span id="output_menu3_name"></span>
+              </div>
+              <form id="form3">
+                <br>
+                <p>商品名</p>
+                <input type="text" class="form-control" id="inputname3">
+                <br>
+                <p>値段</p>
+                <input type="text" class="form-control" id="price3" 　placeholder="値段">
+                <br>
+                <p>コメント</p>
+                <textarea class="form-control" rows="3" id="textArea3" style="height: 100px; resize: vertical; overflow: auto;"></textarea>
+
+                <hr>
+                <p>画像アップロード</p>
+                <div>
+                  <input type="file" name="menuimage3" />
+                </div>
+                <br>
+                <a href="javascript:void(0);" onclick="ExecUpload_3();" class="btn btn-primary">アップロード</a>
+                <br>
+                <p id="test3"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">おしらせ</h3>
+            </div>
+            <div class="panel-body">
+              <div align="center">
+                <img id="image4" src="http://122.210.136.164:443/api/img/img-sm.png" class="img-responsive img-rounded" style="text-align:center;">
+              </div>
+              <hr>
+              <p>アップロードの推奨サイズは3840x1500です</p>
+              <form id="form4">
+                <div>
+                  <input type="file" name="img" />
+                </div>
+                <br>
+                <a href="javascript:void(0);" onclick="ExecUpload_4();" class="btn btn-primary">アップロード</a>
+                <p id="test4"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">ひとことコメント</div>
+            <div class="panel-body">
+
+              <textarea class="form-control" rows="3" id="comment1" style="height: 70px; resize: vertical; overflow: auto;"></textarea>
+
+              <hr>
+              <textarea class="form-control" rows="3" id="comment2" style="height: 70px; resize: vertical; overflow: auto;"></textarea>
+
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Jsonソース (確認用)</div>
+            <div class="panel-body">
+              <textarea class="form-control" rows="3" id="textArea" style="height: 150px; resize: vertical; overflow: auto;"></textarea>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-12">
+          <input type="button" value="テキストデータを送信" id="upload" class="btn btn-default btn-lg btn-block" onclick="ExecUpload_json()">
+        </div>
+      </div>
+
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div align="center">
+          <br>
+          <p class="text-muted">Powered by CafeteriaAPI v1.1.0 / ©2018 DABURUTTI All Rights Reserved.
+            <br>
+            <a href="../" class="alert-link">通常ページへ戻る</a>
+
+          </p>
+        </div>
+      </div>
+    </footer>
+
+
+  </header>
+</body>
+
+</html>

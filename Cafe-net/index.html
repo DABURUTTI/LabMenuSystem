@@ -1,0 +1,245 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="#4286f4" name="theme-color">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="EeLOgL7zYBg6RWKZV7tHS6jouL_aeYkQrnPGXdKueRM" />
+  <!-- やあ！わざわざここを覗きに来たのかい？　はじめまして、DABUです！
+	ラボのでっかい画面のあれと、APIとこのサイトは実は学園生の俺が作ったんだ！
+	俺は来年卒業してしまうから、後任を探しているよ、もしよかったらH3Eのダブルッチを訪ねてみてくれ！
+	ファイルを丸ごとあげるし、可能であるならばサーバーも引き継いでもらいたい
+	気軽に質問しに来てね！もしくは、daburutti@gmail.comまで! -->
+  <title>ラボメニューWEB</title>
+  <link rel="shortcut icon" href="./favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="icon" href="./favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <style type="text/css">
+    body {
+      padding-top: 80px;
+    }
+
+    @media ( min-width: 768px) {
+      #banner {
+        min-height: 300px;
+        border-bottom: none;
+      }
+      .bs-docs-section {
+        margin-top: 8em;
+      }
+      .bs-component {
+        position: relative;
+      }
+      .bs-component .modal {
+        position: relative;
+        top: auto;
+        right: auto;
+        left: auto;
+        bottom: auto;
+        z-index: 1;
+        display: block;
+      }
+      .bs-component .modal-dialog {
+        width: 90%;
+      }
+      .bs-component .popover {
+        position: relative;
+        display: inline-block;
+        width: 220px;
+        margin: 20px;
+      }
+      .nav-tabs {
+        margin-bottom: 15px;
+      }
+      .progress {
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+
+  <!--[if lt IE 9]>
+      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <!-- APIからJsonを取得して画面に反映させる一連の処理
+      学校のネットからの接続の場合は3000ポートにアクセスできないため、エラーになる（と思う）
+    どうする...? →SSLのポート潰しました（半ギレ） -->
+  <script type="text/javascript">
+    window.onload = function getJson() {
+      var xmlhttp = createXMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4) {
+          if (xmlhttp.status == 200) {
+            var data = JSON.parse(xmlhttp.responseText);
+            var elem = document.getElementById("output_menu1_name");
+            elem.innerText = data.menu1_name;
+            var elem = document.getElementById("output_menu2_name");
+            elem.innerText = data.menu2_name;
+            var elem = document.getElementById("output_menu3_name");
+            elem.innerText = data.menu3_name;
+            var elem = document.getElementById("output_comment1");
+            elem.innerText = data.comment1;
+            var elem = document.getElementById("output_comment2");
+            elem.innerText = data.comment2;
+          } else {
+            alert("APIサーバーとの通信に失敗しました。APIサーバーがオフラインです。");
+          }
+        }
+      }
+
+      xmlhttp.open("GET", "http://122.210.136.164:443/api/json/menus.json");
+      xmlhttp.send();
+    }
+    function createXMLHttpRequest() {
+      if (window.XMLHttpRequest) { return new XMLHttpRequest() }
+      if (window.ActiveXObject) {
+        try { return new ActiveXObject("Msxml2.XMLHTTP.6.0") } catch (e) { }
+        try { return new ActiveXObject("Msxml2.XMLHTTP.3.0") } catch (e) { }
+        try { return new ActiveXObject("Microsoft.XMLHTTP") } catch (e) { }
+      }
+      return false;
+    }
+
+  </script>
+
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="./index.html" class="navbar-brand">ラボメニューWEB</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9">
+          <h1>湘南学園カフェテリア</h1>
+          <p class="lead">今日のメニューはなんでしょう？ </p>
+        </div>
+        <div class="col-lg-3">
+          <br>
+          <div class="alert alert-dismissible alert-info">
+            <div align="center">
+              <strong>更新は毎日12時です！</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">メニュー A</h3>
+            </div>
+            <div class="panel-body">
+              <div align="center">
+                <img src="http://122.210.136.164:443/api/img/menuimage1-sm.png" class="img-responsive img-rounded">
+
+                <span id="output_menu1_name"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">メニュー B</h3>
+            </div>
+            <div class="panel-body">
+              <div align="center">
+                <img src="http://122.210.136.164:443/api/img/menuimage2-sm.png" class="img-responsive img-rounded">
+
+                <span id="output_menu2_name"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">メニュー C</h3>
+            </div>
+            <div class="panel-body">
+              <div align="center">
+                <img src="http://122.210.136.164:443/api/img/menuimage3-sm.png" class="img-responsive img-rounded">
+
+                <span id="output_menu3_name"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">おしらせ</h3>
+            </div>
+            <div class="panel-body">
+              <div align="center">
+                <img src="http://122.210.136.164:443/api/img/img-sm.png" class="img-responsive img-rounded">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">ひとことコメント</div>
+            <div class="panel-body">
+
+              <h4>
+                <span id="output_comment1"></span>
+              </h4>
+              <hr>
+              <h4>
+                <span id="output_comment2"></span>
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">その他</h3>
+            </div>
+            <div class="panel-body">
+              <p>お知らせ画像を募集しています！ daburutti@gmail.com　まで！
+                <br>ツイッターBOTもあるのでぜひフォローしてください！
+                <a href="https://twitter.com/Cafeteria_SG" class="alert-link">ツイッターをフォロー</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <footer class="footer">
+      <div class="container">
+        <div align="center">
+          <p class="text-muted">Powered by CafeteriaAPI v1.1.1 © DABU All Rights Reserved.
+            <br>
+          </p>
+
+        </div>
+      </div>
+    </footer>
+
+
+  </header>
+</body>
+
+</html>
