@@ -1,0 +1,51 @@
+
+> myapp@0.0.0 start /home/daburutti/myapp
+> node ./bin/www
+
+Port 3000 is already in use
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! myapp@0.0.0 start: `node ./bin/www`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the myapp@0.0.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/daburutti/.npm/_logs/2018-03-15T03_05_06_057Z-debug.log
+
+> myapp@0.0.0 start /home/daburutti/myapp
+> node ./bin/www
+
+Port 3000 is already in use
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! myapp@0.0.0 start: `node ./bin/www`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the myapp@0.0.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/daburutti/.npm/_logs/2018-03-15T03_12_42_978Z-debug.log
+
+> myapp@0.0.0 start /home/daburutti/myapp
+> node ./bin/www
+
+[0mGET / [36m304 [0m421.088 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m2.787 ms - -[0m
+[0mGET /api [32m200 [0m71.700 ms - 935[0m
+[0mGET /stylesheets/style.css [36m304 [0m2.637 ms - -[0m
+[0mGET /api/img/img.png [32m200 [0m20.396 ms - 2672674[0m
+[0mGET /api/img/menuimahe1.png [33m404 [0m3.178 ms - 48[0m
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+[0mGET /api/guid [32m200 [0m8.477 ms - 36[0m
+[0mGET /api/guid [32m200 [0m2.771 ms - 36[0m
+[0mGET /api/guid [32m200 [0m1.666 ms - 36[0m
+[0mGET /api/guid [32m200 [0m0.833 ms - 36[0m
+[0mGET /api/guid [32m200 [0m0.808 ms - 36[0m
+[0mGET /api/guid [32m200 [0m1.176 ms - 36[0m
+[0mGET /api/guid [32m200 [0m1.197 ms - 36[0m
+[0mGET /api/guid [32m200 [0m1.285 ms - 36[0m
+[0mGET /api/guid [32m200 [0m1.160 ms - 36[0m
