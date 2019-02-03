@@ -58,4 +58,4 @@ ApiサーバーはNodeで書かれています。
 - レスポンスを早くしたい
     - 非同期なのに...非同期じゃない！（なんでさ）
 
-© DABU All Rights Reserved.
+© DABU
